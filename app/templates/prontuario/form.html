@@ -1,25 +1,25 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>Nova Anotacao no Prontuario</h1>
-    <div class='card'>
-        <p><strong>Consulta:</strong> {{ consulta.paciente.nome }}
-        {{ consulta.data }} {{ consulta.hora }}</p>
+  <h1>Nova Anotacao no Prontuario</h1>
+  <div class='card'>
+    <p><strong>Consulta:</strong> {{ consulta.paciente.nome }}
+       - {{ consulta.data }} {{ consulta.hora }}</p>
     <br>
     <form method='POST'>
-        <div class='form-group'>
-            <label>Data do Registro</label>
-            <input type='date' name='data_reg' required>
-        </div>
-        <div class='form-group'>
-            <label>Descricao</label>
-            <textarea name='descricao' rows='3' placeholder='Ex: Exame inicial, limpeza...'></textarea>
-        </div>
-        <div class='form-group'>
-            <label>Tratamento Realizado</label>
-            <textarea name='tratamento' rows='3' placeholder='Ex: Extracao dente 18...'></textarea>
-        </div>
-        <button type='submit' class='btn btn-azul'>Salvar</button>
-        <a href='/prontuario' class='btn btn-rubro'>Cancelar</a>
+      <div class='form-group'>
+        <label>Data do Registro</label>
+        <input type='date' name='data_reg' required>
+      </div>
+      <div class='form-group'>
+        <label>Descricao</label>
+        <textarea name='descricao' rows='3' placeholder='Ex: Exame inicial, limpeza...'></textarea>
+      </div>
+      <div class='form-group'>
+        <label>Tratamento Realizado</label>
+        <textarea name='tratamento' rows='3' placeholder='Ex: Extracao dente 18...'></textarea>
+      </div>
+      <button type='submit' class='btn btn-azul'>Salvar</button>
+      <a href='/prontuario' class='btn btn-rubro'>Cancelar</a>
     </form>
-</div>
+  </div>
 {% endblock %}

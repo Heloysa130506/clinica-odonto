@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>{% if consulta %}Editar Consulta{% else %}Nova Consulta{% endif %}</h1>
+<div class='card'>
+    <form method='post'>
+        <div class='form-group'>
+            <label>Paciente</label>
+            <select name='paciente_id' required>
+                <option value=''>Selecione...</option>
+                {% for p in pacientes %}
+                <option value='{{ p.id }}'
+                    {% if consulta and consulta.paciente_id == p.id %}selected{% endif %}
+                >
+                    {{ p.nome }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class='form-group'>
+            <label>Data</label>
+            <input type='date' name='data' required
+                value='{% if consulta %}{{ consulta.data }}{% endif %}'>
+        </div>
+        <div class='form-group'>
+            <label>Hora</label>
+            <input type='time' name='hora'
+                value='{% if consulta %}{{ consulta.hora }}{% endif %}'>
+        </div>
+        <div class='form-group'>
+            <label>Dentista</label>
+            <input type='text' name='dentista'
+                value='{% if consulta %}{{ consulta.dentista }}{% endif %}'>
+        </div>
+        <div class='form-group'>
+            <label>Observacao</label>
+            <textarea name='observacao' rows='3'>
+                {% if consulta %}{{ consulta.observacao }}{% endif %}
+            </textarea>
+        </div>
+        <div class='form-group'>
+            <label>Valor (R$)</label>
+            <input type='number' name='valor' step='0.01' min='0'
+                value='{% if consulta %}{{ consulta.valor }}{% endif %}'
+                placeholder='0.00'>
+        </div>
+        <button type='submit' class='btn btn-azul'>Salvar</button>
+        <a href='/consultas' class='btn btn-rubro'>Cancelar</a>
+    </form>
+</div>
+{% endblock %}

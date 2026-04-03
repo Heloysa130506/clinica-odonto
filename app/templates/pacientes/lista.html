@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Pacientes</h1>
+<a href='/pacientes/novo' class='btn btn-azul'>+ Novo Paciente</a>
+<br><br>
+<table>
+<tr>
+    <th>Nome</th><th>CPF</th><th>Telefone</th><th>Email</th><th>Acoes</th>
+</tr>
+{% for p in pacientes %}
+<tr>
+    <td>{{ p.nome }}</td>
+    <td>{{ p.cpf }}</td>
+    <td>{{ p.telefone }}</td>
+    <td>{{ p.email }}</td>
+    <td>
+        <a href='/pacientes/editar/{{ p.id }}' class='btn btn-verde'>Editar</a>
+        <a href='/pacientes/deletar/{{ p.id }}' class='btn btn-rubro'
+           onclick="return confirm('Deletar este paciente?')">Deletar</a>
+    </td>
+</tr>
+{% else %}
+<tr><td colspan='5' style='text-align:center;color:#888;'>
+    Nenhum paciente cadastrado ainda.
+</td></tr>
+{% endfor %}
+</table>
+{% endblock %}

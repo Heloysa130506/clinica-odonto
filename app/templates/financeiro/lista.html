@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Controle Financeiro</h1>
+<div class='resumo-cards'>
+    <div class='resumo-card'>
+        <div class='label'>Total Faturado</div>
+        <div class='valor' style='color:#1A5276'>
+            R$ {{ '%.2f'|format(total) }}
+        </div>
+    </div>
+    <div class='resumo-card'>
+        <div class='label'>Recebidos</div>
+        <div class='valor' style='color:#1E8449'>
+            R$ {{ '%.2f'|format(recebido) }}
+        </div>
+    </div>
+    <div class='resumo-card'>
+        <div class='label'>Pendentes</div>
+        <div class='valor' style='color:#784212'>
+            R$ {{ '%.2f'|format(pendente) }}
+        </div>
+    </div>
+</div>
+<table>
+<tr>
+    <th>Paciente</th><th>Data</th>
+    <th>Valor</th><th>Status</th><th>Acao</th>
+</tr>
+{% for c in consultas %}
+<tr>
+    <td>{{ c.paciente.nome }}</td>
+    <td>{{ c.data }}</td>
+    <td>R$ {{ '%.2f'|format(c.valor) }}</td>
+    <td>
+        <span class='badge-{{ c.status_pag }}'>{{ c.status_pag }}</span>
+    </td>
+    <td>
+        {% if c.status_pag == 'pendente' %}
+        <a href='/financeiro/pagar/{{ c.id }}' class='btn btn-verde'>Marcar Pago</a>
+        {% else %}
+        <span style='color:#888;font-size:12px'>Pago</span>
+        {% endif %}
+    </td>
+</tr>
+{% endfor %}
+</table>
+{% endblock %}

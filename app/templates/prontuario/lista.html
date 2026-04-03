@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Prontuario / Historico</h1>
+{% endblock %}
+
+{% for c in consultas %}
+<div class='card'>
+<strong>{{ c.paciente.nome }}</strong> - {{ c.data }} {{ c.hora }}
+| Dentista: {{ c.dentista }}
+<a href='/prontuario/novo/{{ c.id }}' class='btn btn-azul'
+   style='float:right;margin-top:-4px'>+ Anotacao</a>
+{% if c.prontuarios %}
+<table style='margin-top:12px'>
+<tr><th>Data</th><th>Descricao</th><th>Tratamento</th></tr>
+{% for pront in c.prontuarios %}
+<tr>
+<td>{{ pront.data_reg }}</td>
+<td>{{ pront.descricao }}</td>
+<td>{{ pront.tratamento }}</td>
+</tr>
+{% endfor %}
+</table>
+{% else %}
+<p style='color:#888;margin-top:8px;font-size:13px'>
+Sem anotacoes no prontuario ainda.
+</p>
+{% endif %}
+</div>
+{% endfor %}
+{% endblock %}

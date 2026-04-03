@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Consultas Agendadas</h1>
+<a href='/consultas/nova' class='btn btn-azul'>+ Nova Consulta</a>
+<br><br>
+<table>
+<tr>
+<th>Paciente</th><th>Data</th><th>Hora</th><th>Dentista</th><th>Valor</th><th>Ações</th>
+</tr>
+{% for c in consultas %}
+<tr>
+<td>{{ c.paciente.nome }}</td>
+<td>{{ c.data }}</td>
+<td>{{ c.hora }}</td>
+<td>{{ c.dentista }}</td>
+<td>R$ {{ '%.2f'|format(c.valor) }}</td>
+<td>
+<a href='/consultas/editar/{{ c.id }}' class='btn btn-verde'>Editar</a>
+<a href='/consultas/deletar/{{ c.id }}' class='btn btn-rubro'
+onclick="return confirm('Deletar esta consulta?')">Deletar</a>
+</td>
+</tr>
+{% else %}
+<tr><td colspan='6' style='text-align:center;color:#888;'>
+Nenhuma consulta agendada ainda.
+</td></tr>
+{% endfor %}
+</table>
+{% endblock %}
